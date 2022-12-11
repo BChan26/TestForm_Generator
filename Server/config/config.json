@@ -1,0 +1,18 @@
+{
+  "development": {
+    "database": "testform_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+
+    "database": "testform_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "testform_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
