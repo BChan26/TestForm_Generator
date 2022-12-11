@@ -16,15 +16,15 @@ module.exports = (sequelize, DataTypes) => {
         onDelete:'CASCADE',
         onUpdate: 'CASCADE'
       }),
-      QuestionBank.hasMany(models.questions, {
+      QuestionBank.hasMany(models.Questions, {
         foreignKey: 'bankId',
-        as: 'bank',
+        as: 'q',
         onDelete:'CASCADE',
         onUpdate: 'CASCADE'
       })
     }
   }
-  questionBank.init({
+  QuestionBank.init({
     title: DataTypes.STRING,
     user_id: {
       type: DataTypes.STRING,
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'QuestionBank',
-    tableName:'qustionBanks'
+    tableName:'questionBanks'
   });
-  return questionBank;
+  return QuestionBank;
 };

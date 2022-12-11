@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Questions.belongsTo(models.QuestionBank, {
         foreignKey: 'bankId',
-        as: 'bank',
+        as: 'q',
         onDelete:'CASCADE',
         onUpdate: 'CASCADE'
       })
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     question: DataTypes.STRING,
     topic: DataTypes.STRING,
     difficulty: DataTypes.INTEGER,
-    answers: DataTypes.ARRAY(DataType.STRING),
+    answers: DataTypes.ARRAY(DataTypes.STRING),
     correct: DataTypes.INTEGER,
     image: DataTypes.STRING,
     type: DataTypes.STRING,
