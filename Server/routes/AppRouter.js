@@ -2,6 +2,7 @@ const Router = require('express').Router()
 const BankRouter = require('./BankRouter')
 const UserRouter = require('./UserRouter')
 const QuestionRouter = require('./QuestionRouter')
+const AuthRouter = require('./AuthRouter')
 
 
 
@@ -10,7 +11,7 @@ const QuestionRouter = require('./QuestionRouter')
 Router.use('/bank', BankRouter)
 Router.use('/user', UserRouter)
 Router.use('/question', QuestionRouter)
-
+Router.use('/auth', AuthRouter)
 
 
 
