@@ -1,4 +1,23 @@
 import { useNavigate } from "react-router-dom"
+import styled from 'styled-components';
+import {Button, Modal} from 'react-bootstrap'
+
+const StyledHeader = styled.div `
+
+border:2px solid black;
+
+.container{
+    height:10vh;
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+}
+.button{
+    margin: 10px;
+
+}
+`;
+
 
 const Header = (props) => {
 
@@ -7,14 +26,17 @@ const Header = (props) => {
 const toCreate = () => {
 navigate('/SignUp')
 }
-
+const toLogin = () => {
+    navigate('/Login')
+}
 
 return(
-    <div>
-        <button onClick ={toCreate}>Create Account</button>
-        <button>Login</button>
+    <StyledHeader>
+    <div className="container">
+        <Button className="button" onClick ={toCreate}>Create Account</Button>
+        <Button className="button" onClick ={toLogin}>Login</Button>
     </div>
-)
-}
+    </StyledHeader>
+)}
 
 export default Header

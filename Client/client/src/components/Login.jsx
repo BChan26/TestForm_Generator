@@ -22,7 +22,7 @@ function Login(props) {
         setUser(payload)
         setAuth(true)
         setLoggedIn(true)
-        console.log(payload)
+
         navigate('/profile')
         } catch (error) {
           alert("invalid username or password")

@@ -8,7 +8,6 @@ const Login = async (req, res) => {
       where: { username: req.body.username },
       raw: true
     })
-    console.log(user && (await auth.comparePassword(req.body.password, user.passwordDigest)))
     if (user && (await auth.comparePassword(req.body.password, user.passwordDigest))) {
       let payload = {
         id: user.id,
