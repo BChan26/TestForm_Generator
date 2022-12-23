@@ -7,6 +7,7 @@ const controller = require('../controllers/BankController')
 //api/bank
 Router.get('/', controller.getBanks)
 Router.get('/:userId', controller.getBanksByUser)
+Router.get('/bankId/:bankId', controller.getBankById)
 Router.post('/', controller.createBank)
 Router.put('/:id', controller.updateBank)
 Router.delete('/:id', controller.deleteBank)

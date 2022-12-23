@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       question: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull:false,
       },
       topic: {
@@ -24,10 +24,10 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING),
       },
       correct: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       type: {
         type: Sequelize.STRING,

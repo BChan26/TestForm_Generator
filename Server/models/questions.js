@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Questions.init({
-    question: DataTypes.STRING,
+    question: DataTypes.TEXT,
     topic: DataTypes.STRING,
     difficulty: DataTypes.INTEGER,
     answers: DataTypes.ARRAY(DataTypes.STRING),
-    correct: DataTypes.INTEGER,
-    image: DataTypes.STRING,
+    correct: DataTypes.STRING,
+    image: DataTypes.TEXT,
     type: DataTypes.STRING,
     tag: DataTypes.STRING,
     bank_id: {

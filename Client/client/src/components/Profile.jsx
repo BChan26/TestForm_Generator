@@ -28,7 +28,7 @@ function Profile(props) {
     const [showCreate, setCreate] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
-        user_id: 0,
+        user_id: user.id,
     })
     const [banks, setBanks] = useState([])
 
@@ -59,7 +59,6 @@ function Profile(props) {
             alert("This field cannot be empty")
         }
         else {
-            setFormData({...formData, user_id: user.id})
             createBank();
         }
     }
@@ -75,7 +74,6 @@ function Profile(props) {
             setBanks(res.data)
         }
         getBanks();
-        
     },[])
 
 

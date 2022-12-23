@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      
+      tests: {
+        type: Sequelize.ARRAY(DataTypes.JSON),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

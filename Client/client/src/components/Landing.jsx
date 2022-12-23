@@ -2,7 +2,7 @@
 const Landing = (props) => {
     return (
         <div>
-            landing
+        Landing
         </div>
     )
 }

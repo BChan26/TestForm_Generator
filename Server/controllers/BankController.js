@@ -11,6 +11,22 @@ const getBanks = async (req, res) => {
         throw error
     }
 }
+//api/bank/bankId/:bankId
+const getBankById = async (req, res) => {
+    try {
+        const bank = await QuestionBank.findOne({
+            where: {id: req.params.bankId}, 
+            include: [{
+                model: Questions,
+                as: 'q',
+                attributes: ['id','question','topic','difficulty','answers','correct','image','type','tag']
+            }]})
+        res.send(bank)
+    }
+    catch (error) {
+        throw error
+    }
+}
 //api/bank/:userId
 const getBanksByUser = async (req,res) => {
     try{
@@ -73,6 +89,7 @@ const deleteBank = async (req, res) => {
 
 module.exports = {
     getBanks,
+    getBankById,
     getBanksByUser,
     createBank,
     updateBank,

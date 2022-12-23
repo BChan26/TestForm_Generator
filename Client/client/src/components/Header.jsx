@@ -29,10 +29,14 @@ navigate('/SignUp')
 const toLogin = () => {
     navigate('/Login')
 }
+const toHome = () => {
+    navigate('/')
+}
 
 return(
     <StyledHeader>
     <div className="container">
+        <Button className="button" onClick={toHome}>Home</Button>
         <Button className="button" onClick ={toCreate}>Create Account</Button>
         <Button className="button" onClick ={toLogin}>Login</Button>
     </div>
