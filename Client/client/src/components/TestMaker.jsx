@@ -9,7 +9,8 @@ function TestMaker(props) {
 
     const jsonData = {
         "TESTNAME":"Test 1",
-        "INSTRUCTIONS": "Here are some instructions"
+        "INSTRUCTIONS": "Here are some instructions",
+        "QUESTIONS":{"insert_rows":[["question1"], ["question2"]]}
     }
 
     useEffect(() => {

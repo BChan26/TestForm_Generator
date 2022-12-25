@@ -25,6 +25,20 @@ const getQuestionByTag = async (req,res) => {
     }
     catch (error){throw error}
 }
+//api/question/:bankId/:difficulty
+const getQuestionByDifficulty = async (req,res) => {
+    try{
+        const response = await Questions.findAll({
+            where: {
+                bankId:req.params.bankId,
+                difficulty: req.params.difficulty
+            }
+        })
+        res.send(response)
+    }
+    catch (error){throw error}
+}
+
 //api/question
 const createQuestion = async (req,res) => {
     try{
@@ -64,5 +78,6 @@ module.exports = {
     createQuestion,
     updateQuestion,
     deleteQuestion,
-    getQuestionByTag
+    getQuestionByTag,
+    getQuestionByDifficulty
 }

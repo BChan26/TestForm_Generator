@@ -6,9 +6,10 @@ import SignUp from './components/SignUp'
 import Login from './components/Login';
 import Profile from './components/Profile';
 import EditBank from './components/EditBank';
-import TestMaker from './components/TestMaker'
+import TestMaker from './components/TestMaker';
 import {DataContext} from './DataContext'
 import { useContext, useState } from 'react';
+import DesignTest from './components/DesignTest';
 
 function App() {
   const [authenticated, setAuth] = useState(false)
@@ -16,6 +17,7 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(true)
   const [currentBank, setCurrentBank] = useState({})
   const [refresh, setRefresh]= useState(0)
+  const [testData, setTestData] = useState([])
 
 //Login is username:dev password:dev
   return (
@@ -25,7 +27,8 @@ function App() {
                             user,setUser,
                             isLoggedIn, setLoggedIn,
                             currentBank, setCurrentBank,
-                            refresh, setRefresh}}>
+                            refresh, setRefresh,
+                            testData, setTestData}}>
     <div className="App">
       <Header/>
       <main>
@@ -36,6 +39,7 @@ function App() {
           <Route exact path ='/login' element = {<Login/>}/>
           <Route exact path ='/editBank' element ={<EditBank/>}/>
           <Route exact path ='/test_maker' element = {<TestMaker/>}/>
+          <Route exact path ='/design_test' element = {<DesignTest/>}/>
         </Routes>
       </main>
       

@@ -4,7 +4,8 @@ const controller = require('../controllers/QuestionController.js')
 // Router.get('/', controller.GetProfiles)
 // Router.get('/:user_id', controller.GetUserProfile)
 
-
+//api/question/
+Router.get('/:bankId/:difficulty', controller.getQuestionByDifficulty)
 Router.get('/:bankId/:tag', controller.getQuestionByTag)
 Router.get('/:bankId',controller.getQuestionsByBank)
 

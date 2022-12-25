@@ -66,6 +66,9 @@ function Profile(props) {
         setCurrentBank(bank)
         navigate('/editBank')
     }
+    const toDesignTest = () => {
+        navigate('/design_test')
+    }
 
     useEffect(()=>{
         setBanks([]);
@@ -82,6 +85,7 @@ function Profile(props) {
         <div>
             <h1>profile, {user.username}</h1>
             <Button onClick={showCreateModal}>Create Question Bank</Button>
+            <Button onClick={toDesignTest} style={{marginLeft:"50px"}}>Design Test</Button>
             {banks.length > 0 ? (
             <div className="grid-container">
                 <div className="grid">
