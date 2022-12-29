@@ -3,6 +3,27 @@ import { DataContext } from '../DataContext';
 import { useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginUser } from '../services/Auth';
+import styled from "styled-components"
+
+const StyledWrapper = styled.div `
+text-align:center;
+height:100vh;
+
+h1{
+    font-family: 'Roboto Slab', serif;
+}
+input[type=text]{
+    margin: 10px;
+    width: 40%;
+    box-shadow: 3px 3px 3px #D6E3F8;
+    border-radius:10px;
+    padding:10px;
+}
+input[type=submit]{
+    width: 15%;
+    height: 50px;
+}
+`;
 
 function Login(props) {
     let navigate = useNavigate()
@@ -30,13 +51,16 @@ function Login(props) {
         }
     }
     return (
+        <StyledWrapper>
         <div>
+            <h1>Look who came back!</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="username" name ="username" value={formData.username} onChange={handleChange}/>
-                <input type="text" placeholder="password" name ="password" value={formData.password} onChange={handleChange}/>
+                <input type="text" placeholder="username" name ="username" value={formData.username} onChange={handleChange}/><br/>
+                <input type="text" placeholder="password" name ="password" value={formData.password} onChange={handleChange}/><br/>
                 <input type="submit"/>
             </form>
         </div>
+        </StyledWrapper>
     );
 }
 

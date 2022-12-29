@@ -11,7 +11,7 @@ function CreateQuestionForm(props) {
     const [questionForm, setQuestionForm] = useState({
         question:'',
         topic:'',
-        difficulty: 0,
+        difficulty: 1,
         answers:[''],
         correct:'',
         image:'',
@@ -29,9 +29,9 @@ function CreateQuestionForm(props) {
     }
 
     const handleAnswers = (index) => (e) => {
-    const tempArr = questionForm.answers
-    const string = e.target.value;
-    tempArr[index] = string;
+        const tempArr = questionForm.answers
+        const string = e.target.value;
+        tempArr[index] = string;
     setQuestionForm({...questionForm, answers: tempArr })
 
     }

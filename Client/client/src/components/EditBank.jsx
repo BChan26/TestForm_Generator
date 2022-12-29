@@ -50,7 +50,7 @@ function EditBank(props) {
     let navigate = useNavigate();
 
     const toTestMaker = () => {
-        navigate('/test_maker')
+        navigate('/design_test')
     }
     
     useEffect(()=>{

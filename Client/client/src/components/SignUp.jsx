@@ -1,6 +1,28 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth';
+import styled from "styled-components"
+
+const StyledWrapper = styled.div `
+text-align:center;
+
+height:100vh;
+
+h1{
+    font-family: 'Roboto Slab', serif;
+}
+input[type=text]{
+    margin: 10px;
+    width: 40%;
+    box-shadow: 3px 3px 3px #D6E3F8;
+    border-radius:10px;
+    padding:10px;
+}
+input[type=submit]{
+    width: 15%;
+    height: 50px;
+}
+`;
 
 const SignUp = (props) => {
 
@@ -30,13 +52,16 @@ const handleSubmit = async (e) =>{
 }
 
 return(
+    <StyledWrapper>
         <div>
+            <h1>Sign up with Test Maker</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="username" name ="username" value={allData.username} onChange={handleChange}/>
-                <input type="text" placeholder="password" name ="password" value={allData.password} onChange={handleChange}/>
-                <input type="submit"/>
+                <input type="text" placeholder="username" name ="username" value={allData.username} onChange={handleChange}/><br/>
+                <input type="text" placeholder="password" name ="password" value={allData.password} onChange={handleChange}/><br/>
+                <input type="submit" value="Sign me up!"/>
             </form>
         </div>
+        </StyledWrapper>
     )
 }
 

@@ -18,7 +18,9 @@ const getQuestionByTag = async (req,res) => {
         const response = await Questions.findAll({
             where: {
                 bankId:req.params.bankId,
-                tag: req.params.tag
+                difficulty:req.params.difficulty,
+                tag: req.params.tag,
+                type: req.params.type
             }
         })
         res.send(response)
@@ -31,12 +33,47 @@ const getQuestionByDifficulty = async (req,res) => {
         const response = await Questions.findAll({
             where: {
                 bankId:req.params.bankId,
-                difficulty: req.params.difficulty
+                difficulty: req.params.difficulty,
+                type:req.params.type
             }
         })
         res.send(response)
     }
     catch (error){throw error}
+}
+
+//getter/:bankId/:difficulty/:tag/:type
+const getQuestionByParams = async (req,res) => {
+    try{
+        const response = await Questions.findAll({
+            where: {
+                bankId: req.params.bankId,
+                difficulty: req.params.difficulty,
+                tag: req.params.tag,
+                type: req.params.type
+            }
+        })
+        res.send(response)
+    }
+    catch (error){
+        throw error
+    }
+}
+//getter/:bankId/:difficulty/:type
+const getQuestionNoTag = async (req,res) => {
+    try{
+        const response = await Questions.findAll({
+            where: {
+                bankId: req.params.bankId,
+                difficulty: req.params.difficulty,
+                type: req.params.type
+            }
+        })
+        res.send(response)
+    }
+    catch (error){
+        throw error
+    }
 }
 
 //api/question
@@ -79,5 +116,7 @@ module.exports = {
     updateQuestion,
     deleteQuestion,
     getQuestionByTag,
-    getQuestionByDifficulty
+    getQuestionByDifficulty,
+    getQuestionByParams,
+    getQuestionNoTag
 }

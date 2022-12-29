@@ -9,10 +9,22 @@ import Client from '../services/api'
 
 const StyledProfile = styled.div`
 
+height:100vh;
+text-align:center;
+
+.container {
+    display:flex;
+    
+}
+h1{
+    font-family: 'Lobster', cursive;
+    font-size: 60px;
+}
+
 .grid-container{
     width: 70%;
-    height: 100vh;
     margin:10px;
+    
 }
 .grid{
     display:grid;
@@ -31,6 +43,7 @@ function Profile(props) {
         user_id: user.id,
     })
     const [banks, setBanks] = useState([])
+    const [refresh, setRefresh] = useState(0)
 
 
 
@@ -61,6 +74,7 @@ function Profile(props) {
         else {
             createBank();
         }
+        setRefresh(refresh+1)
     }
     const toEditBank = (bank) => {
         setCurrentBank(bank)
@@ -77,21 +91,25 @@ function Profile(props) {
             setBanks(res.data)
         }
         getBanks();
-    },[])
+    },[refresh])
 
 
     return (
         <StyledProfile>
         <div>
-            <h1>profile, {user.username}</h1>
+            <h1>Welcome to your profile, {user.username}</h1>
+
+
+
             <Button onClick={showCreateModal}>Create Question Bank</Button>
             <Button onClick={toDesignTest} style={{marginLeft:"50px"}}>Design Test</Button>
+            <div className="container">
             {banks.length > 0 ? (
             <div className="grid-container">
                 <div className="grid">
                 {
                     banks.map((bank)=>(
-                        <Card key={bank.id} style={{margin:"10px"}}>
+                        <Card key={bank.id} style={{margin:"10px", boxShadow: "2px 2px 10px #D6E3F8"}}>
                             <Card.Title>
                                 <h3>{bank.title}</h3>
                                     <div className="breakdown">
@@ -106,10 +124,15 @@ function Profile(props) {
 
                 </div>
             </div>
-            ): null} 
+            ): null}
+            <div style={{width:"30%", textAlign:"left"}}>
+            <h1>Step 1</h1>
+            <h2>Create a bank and fill it with questions</h2>
+            <h1> Step 2</h1>
+            <h2>Start designing your test!</h2>
+            </div>
 
-
-
+            </div>
 {/* Create Question Bank */}
             <Modal show={showCreate} onHide={handleClose}>
                 <Modal.Header closeButton>

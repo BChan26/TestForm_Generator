@@ -1,4 +1,8 @@
-.App {
-  text-align: center;
+*{
+  margin:0;
+  padding:0;
+  background-color: #FEF5EF;
 }
-
+.main{
+  background-color: #FEF5EF
+}

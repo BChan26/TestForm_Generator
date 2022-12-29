@@ -31,7 +31,7 @@ function App() {
                             testData, setTestData}}>
     <div className="App">
       <Header/>
-      <main>
+      <main className='main'>
         <Routes>
           <Route exact path ='/' element = {<Landing/>}/>
           <Route exact path ='/SignUp' element = {<SignUp/>}/>
