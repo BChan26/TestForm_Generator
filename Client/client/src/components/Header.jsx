@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import styled from 'styled-components';
-import {Button, Modal} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import { useContext } from "react";
 import { DataContext } from "../DataContext";
 

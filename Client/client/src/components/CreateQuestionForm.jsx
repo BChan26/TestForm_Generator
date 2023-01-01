@@ -1,13 +1,12 @@
 import React from 'react';
 import { DataContext } from '../DataContext';
-import { useContext, useEffect, useState} from 'react'
-import {Card, ThemeProvider, Button} from 'react-bootstrap'
-import styled from 'styled-components';
+import { useContext, useState} from 'react'
+import { Button} from 'react-bootstrap'
 import Client from '../services/api';
 
 function CreateQuestionForm(props) {
 
-    const {currentBank, setCurrentBank} = useContext(DataContext)
+    const {currentBank} = useContext(DataContext)
     const [questionForm, setQuestionForm] = useState({
         question:'',
         topic:'',
@@ -23,6 +22,7 @@ function CreateQuestionForm(props) {
     const [MC, setMC] = useState(false)
     const [TF, setTF] = useState(false)
     const {refresh, setRefresh} = useContext(DataContext)
+    const [advanced, setAdvanced] = useState(false)
 
     const handleChange = (e) =>{
         setQuestionForm({...questionForm, [e.target.name]: e.target.value })
@@ -46,16 +46,28 @@ function CreateQuestionForm(props) {
         setMC(false)
         setTF(false)
         
-        if (e.target.name == 'FR') {
+        if (e.target.name === 'FR') {
             setFR(true)
             setQuestionForm({...questionForm, type: 'FR'})}
             
-        else if (e.target.name == 'MC') {
+        else if (e.target.name === 'MC') {
             setMC(true)
             setQuestionForm({...questionForm, type: 'MC'})}
-        else if (e.target.name == 'TF') { 
+        else if (e.target.name === 'TF') { 
             setTF(true)
             setQuestionForm({...questionForm, type: 'TF'})}
+        
+    }
+
+    const handleAdvanced = (e)=> {
+        if (!advanced){
+            document.querySelector(".advanced").style.visibility="visible"
+            setAdvanced(true)
+        }
+        else{
+            document.querySelector(".advanced").style.visibility="hidden"
+            setAdvanced(false)
+        }
         
     }
 
@@ -70,7 +82,7 @@ function CreateQuestionForm(props) {
 
     const addQuestion = async () => {
         try {
-            const res = await Client.post('api/question',questionForm)
+            await Client.post('api/question',questionForm)
                 setQuestionForm({
                     question:'',
                     topic:'',
@@ -132,7 +144,11 @@ function CreateQuestionForm(props) {
                             </select> 
                         </div>
                         ):null}
+{/* Images */}                        
+                        <input accept="image/" type="file" onChange={handleImage}/><br/>
+                        <input type="checkbox" checked={advanced} onChange ={handleAdvanced}/> Show Advanced
 
+                        <div className="advanced" style={{visibility:"hidden"}}>
 {/* topic */}
                         <br/><input type="text" placeholder="topic" value={questionForm.topic} name="topic" onChange={handleChange}></input><br/>
 {/* Difficulty */}
@@ -143,11 +159,11 @@ function CreateQuestionForm(props) {
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select><br/>
-{/* Images */}                        
-                        <input accept="image/" type="file" onChange={handleImage}/><br/>
+
 {/* Tag */}
                         <br/><input type="text" name="tag" placeholder="tags" onChange={handleChange}/><br/>
-                        <input type="submit"/>
+                        </div>
+                        <Button type='submit' style={{margin:10}}>Submit</Button>
                     </form>
     );
 }

@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@syncfusion/ej2-react-documenteditor": "^20.4.40"
+    "@syncfusion/ej2-react-documenteditor": "^20.4.40",
+    "react-icons": "^4.7.1",
+    "uninstall": "^0.0.0"
   }
 }

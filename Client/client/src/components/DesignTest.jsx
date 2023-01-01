@@ -1,41 +1,41 @@
-import React from 'react';
-import {DataContext} from '../DataContext'
-import { useContext, useState, useEffect } from 'react';
-import Client from '../services/api';
-import styled from 'styled-components';
-import {Card, Button} from 'react-bootstrap'
+// import React from 'react';
+// import {DataContext} from '../DataContext'
+// import { useContext, useState, useEffect } from 'react';
+// import Client from '../services/api';
+//import styled from 'styled-components';
+// import {Card, Button} from 'react-bootstrap'
 
-const StyledWrapper = styled.div `
-.bank-details {
-    background-color: #D6E3F8;
-    width: 90%;
-    margin: 5px;
-    box-shadow: 2px 2px 2px grey;
-    padding: 5px;
-}
-.bank-container{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+// const StyledWrapper = styled.div `
+// .bank-details {
+//     background-color: #D6E3F8;
+//     width: 90%;
+//     margin: 5px;
+//     box-shadow: 2px 2px 2px grey;
+//     padding: 5px;
+// }
+// .bank-container{
+//     display:grid;
+//     grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
     
-}
-.request-card{
-    width:50%;
-    margin: 10px;
-}
-.request-form{
-    text-align: center;
-    border: 3px solid black;
-    border-radius:5px;
-    width: 30%;
-    margin-left: 35vw;
-    margin-top: 10px;
-    background-color:white;
-}
-h5{
-    background-color: #D6E3F8;
-    text-align:center;
-}
-`;
+// }
+// .request-card{
+//     width:50%;
+//     margin: 10px;
+// }
+// .request-form{
+//     text-align: center;
+//     border: 3px solid black;
+//     border-radius:5px;
+//     width: 30%;
+//     margin-left: 35vw;
+//     margin-top: 10px;
+//     background-color:white;
+// }
+// h5{
+//     background-color: #D6E3F8;
+//     text-align:center;
+// }
+// `;
 
 
 function DesignTest(props) {

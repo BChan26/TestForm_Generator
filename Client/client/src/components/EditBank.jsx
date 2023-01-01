@@ -44,7 +44,7 @@ const StyledWrapper = styled.div `
 function EditBank(props) {
     const {currentBank, setCurrentBank} = useContext(DataContext)
     const [counter, setCounter] = useState(0)
-    const {refresh, setRefresh} = useContext(DataContext)
+    const {refresh} = useContext(DataContext)
     let navigate = useNavigate();
 
     const toTestMaker = () => {
@@ -61,20 +61,20 @@ function EditBank(props) {
             }
         }
         updateQ()
-        setCounter(counter+1)
-    },[refresh])
+        setCounter(c=>c+1)
+    },[refresh, currentBank.id, setCurrentBank])
 
 
     return counter > 0 ?  (
         <StyledWrapper>
         <div style={{display:"flex", flexDirection:"column"}}>
-            <h1 style={{marginLeft:200}}>{currentBank.title}</h1>
+            <h1 style={{marginLeft:200}}>{currentBank.title}<Button style={{ marginLeft:100}} onClick = {toTestMaker}>Design Test</Button></h1>
             <div className ="form-and-display">
                 <div className="create-form">
                     <h3 style={{marginLeft:10}}>Create Question</h3>
 {/* Create Question Form */}
                     <CreateQuestionForm/>
-                    <Button style={{marginTop:"50px", marginLeft:10}} onClick = {toTestMaker}>Design Test</Button>
+                    
                 </div>
 {/* Display Questions */}
                 {currentBank.q.length > 0 ? (
@@ -100,7 +100,3 @@ function EditBank(props) {
     ): (<h1>...Loading</h1>);}
 
 export default EditBank;
-
-
-
-{/* <img src={questionForm.image}/> */}

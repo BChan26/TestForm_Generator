@@ -1,10 +1,11 @@
 import React from 'react';
 import { DataContext } from '../DataContext';
 import { useState, useContext, useEffect} from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {Button, Modal, Card} from 'react-bootstrap'
 import Client from '../services/api'
+import {BiTrash} from 'react-icons/bi'
 
 
 const StyledProfile = styled.div`
@@ -38,25 +39,23 @@ function Profile(props) {
     let navigate = useNavigate()
     const {user,setCurrentBank, currentBank} = useContext(DataContext)
     const [showCreate, setCreate] = useState(false)
-    const [showDesign, setShowDesign]=useState(false)
+    const [showDelete, setShowDelete]=useState(false)
     const [formData, setFormData] = useState({
         title: '',
         user_id: user.id,
     })
     const [banks, setBanks] = useState([])
     const [refresh, setRefresh] = useState(0)
-    const {testData, setTestData}=useContext(DataContext)
+
 
 
 
     const handleClose = () => {setCreate(false);
-    setShowDesign(false)}
+    setShowDelete(false)}
     const showCreateModal = () => {
         setCreate(true)
     }
-    const showDesignModal =()=>{
-        setShowDesign(true)
-    }
+
     const handleChange = (e) => {
         if (e.target.name ==="testData"){
             setCurrentBank(e.target.value)
@@ -68,23 +67,28 @@ function Profile(props) {
         e.preventDefault();
         const createBank = async () => {
             try{
-                const res = await Client.post('api/bank',formData)
-                setFormData({title:'', user_id:0})
+                await Client.post('api/bank',formData)
+                setFormData({title:'', user_id:user.id})
                 document.querySelector('.success').style.visibility= "visible";
+                setCreate(false)
+                setRefresh(refresh+1)
             } catch (error) {
                 console.log('error creating bank')
                 throw error
             }
         }
-        if (formData.title == '')
+        if (formData.title === '')
         {
             alert("This field cannot be empty")
         }
         else {
             createBank();
         }
-        setRefresh(refresh+1)
+        
+        
+        
     }
+
     const toEditBank = (bank) => {
         setCurrentBank(bank)
         navigate('/editBank')
@@ -95,6 +99,16 @@ function Profile(props) {
         setCurrentBank(bank)
         navigate(`/test_maker`)
     }
+    const deleteBankModal = (bank)=>{
+        setCurrentBank(bank)
+        setShowDelete(true)
+    }
+
+    const deleteBank = async ()=>{
+        await Client.delete(`api/bank/${currentBank.id}`)
+        setRefresh(refresh+1)
+        setShowDelete(false)
+    }
 
     useEffect(()=>{
         setBanks([]);
@@ -103,7 +117,7 @@ function Profile(props) {
             setBanks(res.data)
         }
         getBanks();
-    },[refresh])
+    },[refresh, user.id])
 
 
     return (
@@ -119,7 +133,8 @@ function Profile(props) {
                     banks.map((bank)=>(
                         <Card key={bank.id} style={{margin:"10px", boxShadow: "2px 2px 10px lightgrey", backgroundColor: "#D6E3F8", border: "3px solid black"}}>
                             <Card.Title style={{backgroundColor: "#D6E3F8"}}>
-                                <h3 style={{backgroundColor: "#D6E3F8"}}>{bank.title}</h3>
+                                <h3 style={{backgroundColor: "#D6E3F8"}}>{bank.title}<BiTrash style={{marginLeft:50}} onClick={()=>deleteBankModal(bank)}/></h3>
+                                
                                     <div className="breakdown" style={{backgroundColor: "#D6E3F8"}}>
                                         Questions:{bank.q.length}
                                     </div>
@@ -157,6 +172,18 @@ function Profile(props) {
                     <br/><br/>
                     <h3 className = "success" style={{visibility:"hidden"}}>Success!</h3>
                     </form>
+                </Modal.Body>
+            </Modal>
+{/* Delete Bank */}
+            <Modal show={showDelete} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <h1>Delete {currentBank.title}?</h1>
+                    
+                </Modal.Header>
+                <Modal.Body>
+                    <h5>This Cannot Be Undone</h5>
+                    <Button onClick={deleteBank}>Confirm</Button>
+                    
                 </Modal.Body>
             </Modal>
         </StyledProfile>

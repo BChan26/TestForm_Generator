@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import EditBank from './components/EditBank';
 import TestMaker from './components/TestMaker';
 import {DataContext} from './DataContext'
-import { useContext, useState } from 'react';
+import {useState } from 'react';
 import DesignTest from './components/DesignTest';
 
 function App() {

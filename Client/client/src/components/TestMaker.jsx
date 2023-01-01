@@ -1,9 +1,8 @@
 import React from 'react';
-import WebViewer from '@pdftron/webviewer'
-import {useRef, useEffect, useContext, useState} from 'react';
+import { useContext} from 'react';
 import { DataContext } from '../DataContext';
-import {Button, Modal} from 'react-bootstrap'
-import {DocumentEditorContainerComponent, Toolbar, Inject} from '@syncfusion/ej2-react-documenteditor'
+import {Button} from 'react-bootstrap'
+import {DocumentEditorContainerComponent, Toolbar} from '@syncfusion/ej2-react-documenteditor'
 
 
 
@@ -11,7 +10,6 @@ DocumentEditorContainerComponent.Inject(Toolbar)
 function TestMaker(props) {
 
     const {currentBank} = useContext(DataContext)
-    const [instructions, setInstructions] = useState("<<Add Instructions Here>>")
 
     let container = DocumentEditorContainerComponent;
     const onSave=()=>{
@@ -20,7 +18,7 @@ function TestMaker(props) {
 
     const shuffle = (array) => {
             let currentIndex = array.length, randomIndex;
-            while (currentIndex != 0) {
+            while (currentIndex !== 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
             [array[currentIndex], array[randomIndex]] = [
@@ -37,7 +35,7 @@ function TestMaker(props) {
         container.documentEditor.editor.insertText("name: ___________ \v")
         container.documentEditor.editor.insertText("class period: ______\v\v")
 
-        container.documentEditor.editor.insertText(instructions + '\v \v \v')
+        container.documentEditor.editor.insertText("<<Add Instructions Here>> \v \v \v")
         let questions = shuffle(currentBank.q)
         let answers=[]
         questions.map((question, index)=>{
@@ -64,6 +62,7 @@ function TestMaker(props) {
                 answers.push('Free Response')
             }
             container.documentEditor.editor.insertText('\v\v\v')
+            return true;
         })
         container.documentEditor.editor.insertSectionBreak();
         container.documentEditor.editor.insertText('Answer Key \v')

@@ -29,7 +29,7 @@ input[type=submit]{
 function Login(props) {
     let navigate = useNavigate()
     const {setUser, setAuth} = useContext(DataContext)
-    const {isLoggedIn, setLoggedIn} = useContext(DataContext)
+    const {setLoggedIn} = useContext(DataContext)
     const [formData, setFormData] = useState({username: '', password: ''})
 
     const handleChange = (e) => {
