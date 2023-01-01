@@ -1,8 +1,8 @@
+
+@import url("http://cdn.syncfusion.com/ej2/20.3.56/bootstrap5.css");
+
 *{
   margin:0;
   padding:0;
-  background-color: #FEF5EF;
 }
-.main{
-  background-color: #FEF5EF
-}
+

@@ -38,9 +38,9 @@ const Landing = (props) => {
         <div>
             <h1>Step 1<span className="material-symbols-outlined">switch_access_shortcut_add</span></h1>
             <h2>Sign up</h2><br/><br/>
-            <h1><span class="material-symbols-outlined" id="step2">swipe_down</span>Step 2</h1>
+            <h1><span className="material-symbols-outlined" id="step2">swipe_down</span>Step 2</h1>
             <h2>Create a question bank</h2><br/><br/>
-            <h1>Step 3<span class="material-symbols-outlined" id="arrow-three">draw</span></h1>
+            <h1>Step 3<span className="material-symbols-outlined" id="arrow-three">draw</span></h1>
             <h2>Design your test!</h2>
         </div>
         </StyledWrapper>

@@ -36,22 +36,31 @@ h1{
 
 function Profile(props) {
     let navigate = useNavigate()
-    const {user,setCurrentBank} = useContext(DataContext)
+    const {user,setCurrentBank, currentBank} = useContext(DataContext)
     const [showCreate, setCreate] = useState(false)
+    const [showDesign, setShowDesign]=useState(false)
     const [formData, setFormData] = useState({
         title: '',
         user_id: user.id,
     })
     const [banks, setBanks] = useState([])
     const [refresh, setRefresh] = useState(0)
+    const {testData, setTestData}=useContext(DataContext)
 
 
 
-    const handleClose = () => {setCreate(false);}
+    const handleClose = () => {setCreate(false);
+    setShowDesign(false)}
     const showCreateModal = () => {
         setCreate(true)
     }
+    const showDesignModal =()=>{
+        setShowDesign(true)
+    }
     const handleChange = (e) => {
+        if (e.target.name ==="testData"){
+            setCurrentBank(e.target.value)
+        }
         setFormData({...formData, [e.target.name]: e.target.value })
     }
 
@@ -80,8 +89,11 @@ function Profile(props) {
         setCurrentBank(bank)
         navigate('/editBank')
     }
-    const toDesignTest = () => {
-        navigate('/design_test')
+
+    const toTestMaker = (bank)=>
+    {
+        setCurrentBank(bank)
+        navigate(`/test_maker`)
     }
 
     useEffect(()=>{
@@ -98,25 +110,22 @@ function Profile(props) {
         <StyledProfile>
         <div>
             <h1>Welcome to your profile, {user.username}</h1>
-
-
-
             <Button onClick={showCreateModal}>Create Question Bank</Button>
-            <Button onClick={toDesignTest} style={{marginLeft:"50px"}}>Design Test</Button>
             <div className="container">
             {banks.length > 0 ? (
             <div className="grid-container">
                 <div className="grid">
                 {
                     banks.map((bank)=>(
-                        <Card key={bank.id} style={{margin:"10px", boxShadow: "2px 2px 10px #D6E3F8"}}>
-                            <Card.Title>
-                                <h3>{bank.title}</h3>
-                                    <div className="breakdown">
+                        <Card key={bank.id} style={{margin:"10px", boxShadow: "2px 2px 10px lightgrey", backgroundColor: "#D6E3F8", border: "3px solid black"}}>
+                            <Card.Title style={{backgroundColor: "#D6E3F8"}}>
+                                <h3 style={{backgroundColor: "#D6E3F8"}}>{bank.title}</h3>
+                                    <div className="breakdown" style={{backgroundColor: "#D6E3F8"}}>
                                         Questions:{bank.q.length}
                                     </div>
                                     <br/>
-                                <Button onClick={()=>toEditBank(bank)}>Edit Bank</Button>
+                                <Button onClick={()=>toEditBank(bank)} style={{marginRight: "10px"}}>Edit Bank</Button>
+                                <Button onClick={()=>toTestMaker(bank)}>Create Test</Button>
                             </Card.Title>
                         </Card>
                     ))
@@ -133,6 +142,7 @@ function Profile(props) {
             </div>
 
             </div>
+        </div>
 {/* Create Question Bank */}
             <Modal show={showCreate} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -149,8 +159,8 @@ function Profile(props) {
                     </form>
                 </Modal.Body>
             </Modal>
-        </div>
-    </StyledProfile>
-    );}
+        </StyledProfile>
+    )
+}
 
-export default Profile;
+export default Profile
