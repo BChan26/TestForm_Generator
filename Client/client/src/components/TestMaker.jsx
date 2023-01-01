@@ -11,31 +11,11 @@ DocumentEditorContainerComponent.Inject(Toolbar)
 function TestMaker(props) {
 
     const {currentBank} = useContext(DataContext)
-    const viewer = useRef(null);
-    const instance = useRef();
     const [instructions, setInstructions] = useState("<<Add Instructions Here>>")
-    const [refresh, setRefresh]=useState(0)
 
-    const jsonData = {
-        "TESTNAME":currentBank.title + " test",
-        "INSTRUCTIONS": instructions,
-        "QUESTIONS":{"insert_rows":[["question1"], ["question2"]]}
-    }
-
-
-
-    const handleChange = (e) =>{
-        setInstructions(e.target.value)
-    }
-
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        setRefresh(refresh+1)
-    }
-
-    let editorObj = DocumentEditorContainerComponent | null;
+    let container = DocumentEditorContainerComponent;
     const onSave=()=>{
-        editorObj?.documentEditor.save("Sample", "Docx")
+        container?.documentEditor.save(`${currentBank.title} test`, "Docx")
     }
 
     const shuffle = (array) => {
@@ -49,21 +29,48 @@ function TestMaker(props) {
             return(array);
         }
 
-        let container = DocumentEditorContainerComponent;
-        const onCreated = () => {
+    
+    const onCreated = () => {
+    
+        container.documentEditor.editor.insertText(currentBank.title +"\v")
         
-            container.documentEditor.editor.insertText(currentBank.title +"\v")
-            container.documentEditor.editor.insertText("name: ___________ \v")
-            container.documentEditor.editor.insertText("class period: ______\v\v")
+        container.documentEditor.editor.insertText("name: ___________ \v")
+        container.documentEditor.editor.insertText("class period: ______\v\v")
 
-            container.documentEditor.editor.insertText(instructions + '\v \v \v')
-
-            let questions = shuffle(currentBank.q)
-            questions.map((question, index)=>(
-                container.documentEditor.editor.insertText(index+1+'.' + question.question+'\v \v \v')
-            ))
+        container.documentEditor.editor.insertText(instructions + '\v \v \v')
+        let questions = shuffle(currentBank.q)
+        let answers=[]
+        questions.map((question, index)=>{
+            container.documentEditor.editor.insertImage()
+            container.documentEditor.editor.insertText(index+1+'. ' + question.question +'\v');
             
+            if (question.type === 'MC'){
+                for (let i=0; i<question.answers.length; i++){
+                    let char = String.fromCharCode(97 + i)
+                    container.documentEditor.editor.insertText('\v' + char + '. ' +question.answers[i] + '\v')
+                    if (question.correct === question.answers[i])
+                    {
+                        answers.push(char)
+                    }
+                }
+            }
+            else if (question.type === 'TF'){
+                container.documentEditor.editor.insertText(' \v a.true \v')
+                container.documentEditor.editor.insertText('\v b.false \v')
+                question.correct === 'true' ? answers.push('a') : answers.push('b')
+            }
+            else if(question.type === 'FR'){
+                container.documentEditor.editor.insertText(' \v\v\v\v\v')
+                answers.push('Free Response')
+            }
+            container.documentEditor.editor.insertText('\v\v\v')
+        })
+        container.documentEditor.editor.insertSectionBreak();
+        container.documentEditor.editor.insertText('Answer Key \v')
+        for (let i=0;i<answers.length;i++){
+            container.documentEditor.editor.insertText(`\v ${i+1}. ${answers[i]} \v`)
         }
+    }
         
 
     
