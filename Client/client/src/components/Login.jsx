@@ -4,6 +4,7 @@ import { useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginUser } from '../services/Auth';
 import styled from "styled-components"
+import {Button} from 'react-bootstrap'
 
 const StyledWrapper = styled.div `
 text-align:center;
@@ -57,7 +58,7 @@ function Login(props) {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="username" name ="username" value={formData.username} onChange={handleChange}/><br/>
                 <input type="text" placeholder="password" name ="password" value={formData.password} onChange={handleChange}/><br/>
-                <input type="submit"/>
+                <Button type="submit">Log In!</Button>
             </form>
         </div>
         </StyledWrapper>

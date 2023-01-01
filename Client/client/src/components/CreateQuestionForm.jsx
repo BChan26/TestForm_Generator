@@ -97,7 +97,7 @@ function CreateQuestionForm(props) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{marginLeft:10, marginRight:10}}>
                         <textarea placeholder="question" style={{width:"100%"}} value={questionForm.question} name="question" onChange={handleChange}></textarea><br/>
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <input type="checkbox" checked={FR} name="FR" onChange={handleChecked}/><h5 className="checkbox">Free Response</h5>

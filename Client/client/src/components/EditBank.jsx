@@ -12,14 +12,12 @@ import TrueFalse from './QuestionComponents/TrueFalse';
 
 
 const StyledWrapper = styled.div `
-height: 150vh;
 
 .form-and-display{
     display:flex;
     flex-direction:row; 
     justify-content:space-evenly;
-    border:2px solid black; 
-    height: 120vh;
+    height: 80vh;
 }
 .create-form{
     width:50%;
@@ -50,7 +48,7 @@ function EditBank(props) {
     let navigate = useNavigate();
 
     const toTestMaker = () => {
-        navigate('/design_test')
+        navigate('/test_maker')
     }
     
     useEffect(()=>{
@@ -70,20 +68,20 @@ function EditBank(props) {
     return counter > 0 ?  (
         <StyledWrapper>
         <div style={{display:"flex", flexDirection:"column"}}>
-            <h1>{currentBank.title}</h1>
+            <h1 style={{marginLeft:200}}>{currentBank.title}</h1>
             <div className ="form-and-display">
                 <div className="create-form">
-                    <h3>Create Question</h3>
+                    <h3 style={{marginLeft:10}}>Create Question</h3>
 {/* Create Question Form */}
                     <CreateQuestionForm/>
-                    <Button style={{marginTop:"50px"}} onClick = {toTestMaker}>Design Test</Button>
+                    <Button style={{marginTop:"50px", marginLeft:10}} onClick = {toTestMaker}>Design Test</Button>
                 </div>
 {/* Display Questions */}
                 {currentBank.q.length > 0 ? (
-                <div style={{overflowY: "scroll", width:"50%"}}>
+                <div style={{overflowY: "scroll", width:"50%", border:"2px solid grey", height:'75vh'}}>
                     {
                         currentBank.q.map((question, index)=>(
-                            <Card key={question.id}>
+                            <Card key={question.id} style={{margin:10, padding:10, boxShadow: "2px 2px 2px grey"}}>
 
                                 { 
                                 question.type === 'MC' ? ( <MultipleChoice question = {question}/>) : 

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth';
 import styled from "styled-components"
+import {Button} from 'react-bootstrap'
 
 const StyledWrapper = styled.div `
 text-align:center;
@@ -58,7 +59,7 @@ return(
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="username" name ="username" value={allData.username} onChange={handleChange}/><br/>
                 <input type="text" placeholder="password" name ="password" value={allData.password} onChange={handleChange}/><br/>
-                <input type="submit" value="Sign me up!"/>
+                <Button type="submit">Sign me up!</Button>
             </form>
         </div>
         </StyledWrapper>
